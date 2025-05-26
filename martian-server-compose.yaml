@@ -1,0 +1,323 @@
+version: '3'
+services:
+
+  martian-server1:
+    image: zhaozuodong/gomitmproxy:latest
+    restart: always
+    working_dir: /go/src/gomitmproxy
+    command: > 
+      ./gomitmproxy -v 1
+      -auth-username="cmm"
+      -auth-password="cmm123"
+      -downstream-proxy-url="socks5://ty:ty@182.151.20.5:7080"
+      -use-local-ca-cert=true
+      -kafka-topic="xhs-group"
+      -kafka-brokers="10.64.117.97:9092,10.64.117.98:9092,10.64.117.96:9092"
+      -allow-tls-urls="/api/sns/v3/user/info,/api/sns/v4/note/user/posted,/api/sns/v3/note/videofeed,/api/sns/v2/note/feed,/api/sns/v1/note/feed,/api/sns/v5/note/comment/list,/api/sns/v1/note/imagefeed,/api/sns/v4/note/videofeed"
+    ports:
+      - "10001:8892"
+    
+  martian-server2:
+    image: zhaozuodong/gomitmproxy:latest
+    restart: always
+    working_dir: /go/src/gomitmproxy
+    command: > 
+      ./gomitmproxy -v 1
+      -auth-username="cmm"
+      -auth-password="cmm123"
+      -downstream-proxy-url="socks5://ty:ty@110.185.104.208:7080"
+      -use-local-ca-cert=true
+      -kafka-topic="xhs-group"
+      -kafka-brokers="10.64.117.97:9092,10.64.117.98:9092,10.64.117.96:9092"
+      -allow-tls-urls="/api/sns/v3/user/info,/api/sns/v4/note/user/posted,/api/sns/v3/note/videofeed,/api/sns/v2/note/feed,/api/sns/v1/note/feed,/api/sns/v5/note/comment/list,/api/sns/v1/note/imagefeed,/api/sns/v4/note/videofeed"
+    ports:
+      - "10002:8892"
+    
+  martian-server3:
+    image: zhaozuodong/gomitmproxy:latest
+    restart: always
+    working_dir: /go/src/gomitmproxy
+    command: > 
+      ./gomitmproxy -v 1
+      -auth-username="cmm"
+      -auth-password="cmm123"
+      -downstream-proxy-url="socks5://ty:ty@182.151.59.206:7080"
+      -use-local-ca-cert=true
+      -kafka-topic="xhs-group"
+      -kafka-brokers="10.64.117.97:9092,10.64.117.98:9092,10.64.117.96:9092"
+      -allow-tls-urls="/api/sns/v3/user/info,/api/sns/v4/note/user/posted,/api/sns/v3/note/videofeed,/api/sns/v2/note/feed,/api/sns/v1/note/feed,/api/sns/v5/note/comment/list,/api/sns/v1/note/imagefeed,/api/sns/v4/note/videofeed"
+    ports:
+      - "10003:8892"
+    
+  martian-server4:
+    image: zhaozuodong/gomitmproxy:latest
+    restart: always
+    working_dir: /go/src/gomitmproxy
+    command: > 
+      ./gomitmproxy -v 1
+      -auth-username="cmm"
+      -auth-password="cmm123"
+      -downstream-proxy-url="socks5://ty:ty@182.151.30.55:7080"
+      -use-local-ca-cert=true
+      -kafka-topic="xhs-group"
+      -kafka-brokers="10.64.117.97:9092,10.64.117.98:9092,10.64.117.96:9092"
+      -allow-tls-urls="/api/sns/v3/user/info,/api/sns/v4/note/user/posted,/api/sns/v3/note/videofeed,/api/sns/v2/note/feed,/api/sns/v1/note/feed,/api/sns/v5/note/comment/list,/api/sns/v1/note/imagefeed,/api/sns/v4/note/videofeed"
+    ports:
+      - "10004:8892"
+    
+  martian-server5:
+    image: zhaozuodong/gomitmproxy:latest
+    restart: always
+    working_dir: /go/src/gomitmproxy
+    command: > 
+      ./gomitmproxy -v 1
+      -auth-username="cmm"
+      -auth-password="cmm123"
+      -downstream-proxy-url="socks5://ty:ty@110.188.23.182:7080"
+      -use-local-ca-cert=true
+      -kafka-topic="xhs-group"
+      -kafka-brokers="10.64.117.97:9092,10.64.117.98:9092,10.64.117.96:9092"
+      -allow-tls-urls="/api/sns/v3/user/info,/api/sns/v4/note/user/posted,/api/sns/v3/note/videofeed,/api/sns/v2/note/feed,/api/sns/v1/note/feed,/api/sns/v5/note/comment/list,/api/sns/v1/note/imagefeed,/api/sns/v4/note/videofeed"
+    ports:
+      - "10005:8892"
+    
+  martian-server6:
+    image: zhaozuodong/gomitmproxy:latest
+    restart: always
+    working_dir: /go/src/gomitmproxy
+    command: > 
+      ./gomitmproxy -v 1
+      -auth-username="cmm"
+      -auth-password="cmm123"
+      -downstream-proxy-url="socks5://ty:ty@171.220.243.144:7080"
+      -use-local-ca-cert=true
+      -kafka-topic="xhs-group"
+      -kafka-brokers="10.64.117.97:9092,10.64.117.98:9092,10.64.117.96:9092"
+      -allow-tls-urls="/api/sns/v3/user/info,/api/sns/v4/note/user/posted,/api/sns/v3/note/videofeed,/api/sns/v2/note/feed,/api/sns/v1/note/feed,/api/sns/v5/note/comment/list,/api/sns/v1/note/imagefeed,/api/sns/v4/note/videofeed"
+    ports:
+      - "10006:8892"
+    
+  martian-server7:
+    image: zhaozuodong/gomitmproxy:latest
+    restart: always
+    working_dir: /go/src/gomitmproxy
+    command: > 
+      ./gomitmproxy -v 1
+      -auth-username="cmm"
+      -auth-password="cmm123"
+      -downstream-proxy-url="socks5://ty:ty@182.151.47.125:7080"
+      -use-local-ca-cert=true
+      -kafka-topic="xhs-group"
+      -kafka-brokers="10.64.117.97:9092,10.64.117.98:9092,10.64.117.96:9092"
+      -allow-tls-urls="/api/sns/v3/user/info,/api/sns/v4/note/user/posted,/api/sns/v3/note/videofeed,/api/sns/v2/note/feed,/api/sns/v1/note/feed,/api/sns/v5/note/comment/list,/api/sns/v1/note/imagefeed,/api/sns/v4/note/videofeed"
+    ports:
+      - "10007:8892"
+    
+  martian-server8:
+    image: zhaozuodong/gomitmproxy:latest
+    restart: always
+    working_dir: /go/src/gomitmproxy
+    command: > 
+      ./gomitmproxy -v 1
+      -auth-username="cmm"
+      -auth-password="cmm123"
+      -downstream-proxy-url="socks5://ty:ty@182.151.30.75:7080"
+      -use-local-ca-cert=true
+      -kafka-topic="xhs-group"
+      -kafka-brokers="10.64.117.97:9092,10.64.117.98:9092,10.64.117.96:9092"
+      -allow-tls-urls="/api/sns/v3/user/info,/api/sns/v4/note/user/posted,/api/sns/v3/note/videofeed,/api/sns/v2/note/feed,/api/sns/v1/note/feed,/api/sns/v5/note/comment/list,/api/sns/v1/note/imagefeed,/api/sns/v4/note/videofeed"
+    ports:
+      - "10008:8892"
+    
+  martian-server9:
+    image: zhaozuodong/gomitmproxy:latest
+    restart: always
+    working_dir: /go/src/gomitmproxy
+    command: > 
+      ./gomitmproxy -v 1
+      -auth-username="cmm"
+      -auth-password="cmm123"
+      -downstream-proxy-url="socks5://ty:ty@182.151.0.47:7080"
+      -use-local-ca-cert=true
+      -kafka-topic="xhs-group"
+      -kafka-brokers="10.64.117.97:9092,10.64.117.98:9092,10.64.117.96:9092"
+      -allow-tls-urls="/api/sns/v3/user/info,/api/sns/v4/note/user/posted,/api/sns/v3/note/videofeed,/api/sns/v2/note/feed,/api/sns/v1/note/feed,/api/sns/v5/note/comment/list,/api/sns/v1/note/imagefeed,/api/sns/v4/note/videofeed"
+    ports:
+      - "10009:8892"
+    
+  martian-server10:
+    image: zhaozuodong/gomitmproxy:latest
+    restart: always
+    working_dir: /go/src/gomitmproxy
+    command: > 
+      ./gomitmproxy -v 1
+      -auth-username="cmm"
+      -auth-password="cmm123"
+      -downstream-proxy-url="socks5://ty:ty@110.185.102.26:7080"
+      -use-local-ca-cert=true
+      -kafka-topic="xhs-group"
+      -kafka-brokers="10.64.117.97:9092,10.64.117.98:9092,10.64.117.96:9092"
+      -allow-tls-urls="/api/sns/v3/user/info,/api/sns/v4/note/user/posted,/api/sns/v3/note/videofeed,/api/sns/v2/note/feed,/api/sns/v1/note/feed,/api/sns/v5/note/comment/list,/api/sns/v1/note/imagefeed,/api/sns/v4/note/videofeed"
+    ports:
+      - "10010:8892"
+    
+  martian-server11:
+    image: zhaozuodong/gomitmproxy:latest
+    restart: always
+    working_dir: /go/src/gomitmproxy
+    command: > 
+      ./gomitmproxy -v 1
+      -auth-username="cmm"
+      -auth-password="cmm123"
+      -downstream-proxy-url="socks5://ty:ty@182.151.21.42:7080"
+      -use-local-ca-cert=true
+      -kafka-topic="xhs-group"
+      -kafka-brokers="10.64.117.97:9092,10.64.117.98:9092,10.64.117.96:9092"
+      -allow-tls-urls="/api/sns/v3/user/info,/api/sns/v4/note/user/posted,/api/sns/v3/note/videofeed,/api/sns/v2/note/feed,/api/sns/v1/note/feed,/api/sns/v5/note/comment/list,/api/sns/v1/note/imagefeed,/api/sns/v4/note/videofeed"
+    ports:
+      - "10011:8892"
+    
+  martian-server12:
+    image: zhaozuodong/gomitmproxy:latest
+    restart: always
+    working_dir: /go/src/gomitmproxy
+    command: > 
+      ./gomitmproxy -v 1
+      -auth-username="cmm"
+      -auth-password="cmm123"
+      -downstream-proxy-url="socks5://ty:ty@121.228.40.255:7080"
+      -use-local-ca-cert=true
+      -kafka-topic="xhs-group"
+      -kafka-brokers="10.64.117.97:9092,10.64.117.98:9092,10.64.117.96:9092"
+      -allow-tls-urls="/api/sns/v3/user/info,/api/sns/v4/note/user/posted,/api/sns/v3/note/videofeed,/api/sns/v2/note/feed,/api/sns/v1/note/feed,/api/sns/v5/note/comment/list,/api/sns/v1/note/imagefeed,/api/sns/v4/note/videofeed"
+    ports:
+      - "10012:8892"
+    
+  martian-server13:
+    image: zhaozuodong/gomitmproxy:latest
+    restart: always
+    working_dir: /go/src/gomitmproxy
+    command: > 
+      ./gomitmproxy -v 1
+      -auth-username="cmm"
+      -auth-password="cmm123"
+      -downstream-proxy-url="socks5://ty:ty@114.218.57.150:7080"
+      -use-local-ca-cert=true
+      -kafka-topic="xhs-group"
+      -kafka-brokers="10.64.117.97:9092,10.64.117.98:9092,10.64.117.96:9092"
+      -allow-tls-urls="/api/sns/v3/user/info,/api/sns/v4/note/user/posted,/api/sns/v3/note/videofeed,/api/sns/v2/note/feed,/api/sns/v1/note/feed,/api/sns/v5/note/comment/list,/api/sns/v1/note/imagefeed,/api/sns/v4/note/videofeed"
+    ports:
+      - "10013:8892"
+    
+  martian-server14:
+    image: zhaozuodong/gomitmproxy:latest
+    restart: always
+    working_dir: /go/src/gomitmproxy
+    command: > 
+      ./gomitmproxy -v 1
+      -auth-username="cmm"
+      -auth-password="cmm123"
+      -downstream-proxy-url="socks5://ty:ty@117.80.145.88:7080"
+      -use-local-ca-cert=true
+      -kafka-topic="xhs-group"
+      -kafka-brokers="10.64.117.97:9092,10.64.117.98:9092,10.64.117.96:9092"
+      -allow-tls-urls="/api/sns/v3/user/info,/api/sns/v4/note/user/posted,/api/sns/v3/note/videofeed,/api/sns/v2/note/feed,/api/sns/v1/note/feed,/api/sns/v5/note/comment/list,/api/sns/v1/note/imagefeed,/api/sns/v4/note/videofeed"
+    ports:
+      - "10014:8892"
+    
+  martian-server15:
+    image: zhaozuodong/gomitmproxy:latest
+    restart: always
+    working_dir: /go/src/gomitmproxy
+    command: > 
+      ./gomitmproxy -v 1
+      -auth-username="cmm"
+      -auth-password="cmm123"
+      -downstream-proxy-url="socks5://ty:ty@117.80.86.226:7080"
+      -use-local-ca-cert=true
+      -kafka-topic="xhs-group"
+      -kafka-brokers="10.64.117.97:9092,10.64.117.98:9092,10.64.117.96:9092"
+      -allow-tls-urls="/api/sns/v3/user/info,/api/sns/v4/note/user/posted,/api/sns/v3/note/videofeed,/api/sns/v2/note/feed,/api/sns/v1/note/feed,/api/sns/v5/note/comment/list,/api/sns/v1/note/imagefeed,/api/sns/v4/note/videofeed"
+    ports:
+      - "10015:8892"
+    
+  martian-server16:
+    image: zhaozuodong/gomitmproxy:latest
+    restart: always
+    working_dir: /go/src/gomitmproxy
+    command: > 
+      ./gomitmproxy -v 1
+      -auth-username="cmm"
+      -auth-password="cmm123"
+      -downstream-proxy-url="socks5://ty:ty@121.229.41.207:7080"
+      -use-local-ca-cert=true
+      -kafka-topic="xhs-group"
+      -kafka-brokers="10.64.117.97:9092,10.64.117.98:9092,10.64.117.96:9092"
+      -allow-tls-urls="/api/sns/v3/user/info,/api/sns/v4/note/user/posted,/api/sns/v3/note/videofeed,/api/sns/v2/note/feed,/api/sns/v1/note/feed,/api/sns/v5/note/comment/list,/api/sns/v1/note/imagefeed,/api/sns/v4/note/videofeed"
+    ports:
+      - "10016:8892"
+    
+  martian-server17:
+    image: zhaozuodong/gomitmproxy:latest
+    restart: always
+    working_dir: /go/src/gomitmproxy
+    command: > 
+      ./gomitmproxy -v 1
+      -auth-username="cmm"
+      -auth-password="cmm123"
+      -downstream-proxy-url="socks5://ty:ty@58.209.83.182:7080"
+      -use-local-ca-cert=true
+      -kafka-topic="xhs-group"
+      -kafka-brokers="10.64.117.97:9092,10.64.117.98:9092,10.64.117.96:9092"
+      -allow-tls-urls="/api/sns/v3/user/info,/api/sns/v4/note/user/posted,/api/sns/v3/note/videofeed,/api/sns/v2/note/feed,/api/sns/v1/note/feed,/api/sns/v5/note/comment/list,/api/sns/v1/note/imagefeed,/api/sns/v4/note/videofeed"
+    ports:
+      - "10017:8892"
+    
+  martian-server18:
+    image: zhaozuodong/gomitmproxy:latest
+    restart: always
+    working_dir: /go/src/gomitmproxy
+    command: > 
+      ./gomitmproxy -v 1
+      -auth-username="cmm"
+      -auth-password="cmm123"
+      -downstream-proxy-url="socks5://ty:ty@221.229.220.45:7080"
+      -use-local-ca-cert=true
+      -kafka-topic="xhs-group"
+      -kafka-brokers="10.64.117.97:9092,10.64.117.98:9092,10.64.117.96:9092"
+      -allow-tls-urls="/api/sns/v3/user/info,/api/sns/v4/note/user/posted,/api/sns/v3/note/videofeed,/api/sns/v2/note/feed,/api/sns/v1/note/feed,/api/sns/v5/note/comment/list,/api/sns/v1/note/imagefeed,/api/sns/v4/note/videofeed"
+    ports:
+      - "10018:8892"
+    
+  martian-server19:
+    image: zhaozuodong/gomitmproxy:latest
+    restart: always
+    working_dir: /go/src/gomitmproxy
+    command: > 
+      ./gomitmproxy -v 1
+      -auth-username="cmm"
+      -auth-password="cmm123"
+      -downstream-proxy-url="socks5://ty:ty@180.101.23.151:7080"
+      -use-local-ca-cert=true
+      -kafka-topic="xhs-group"
+      -kafka-brokers="10.64.117.97:9092,10.64.117.98:9092,10.64.117.96:9092"
+      -allow-tls-urls="/api/sns/v3/user/info,/api/sns/v4/note/user/posted,/api/sns/v3/note/videofeed,/api/sns/v2/note/feed,/api/sns/v1/note/feed,/api/sns/v5/note/comment/list,/api/sns/v1/note/imagefeed,/api/sns/v4/note/videofeed"
+    ports:
+      - "10019:8892"
+    
+  martian-server20:
+    image: zhaozuodong/gomitmproxy:latest
+    restart: always
+    working_dir: /go/src/gomitmproxy
+    command: > 
+      ./gomitmproxy -v 1
+      -auth-username="cmm"
+      -auth-password="cmm123"
+      -downstream-proxy-url="socks5://ty:ty@121.224.5.218:7080"
+      -use-local-ca-cert=true
+      -kafka-topic="xhs-group"
+      -kafka-brokers="10.64.117.97:9092,10.64.117.98:9092,10.64.117.96:9092"
+      -allow-tls-urls="/api/sns/v3/user/info,/api/sns/v4/note/user/posted,/api/sns/v3/note/videofeed,/api/sns/v2/note/feed,/api/sns/v1/note/feed,/api/sns/v5/note/comment/list,/api/sns/v1/note/imagefeed,/api/sns/v4/note/videofeed"
+    ports:
+      - "10020:8892"
+    

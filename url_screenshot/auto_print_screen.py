@@ -1,0 +1,258 @@
+import io
+import time
+from PIL import Image
+from selenium import webdriver
+
+
+class AutoPrintScreen:
+    def __init__(self):
+        self.count = 0
+        options = webdriver.ChromeOptions()
+        options.add_experimental_option('mobileEmulation', {'deviceName': 'iPhone X'})  # 模拟iPhone X浏览
+        self.driver = webdriver.Chrome(options=options)
+
+    def get_screenshot(self, url):
+        self.driver.get(url)
+        time.sleep(2)
+        scroll_height = 0
+        # 存储所有的截图
+        images = []
+        while True:
+            # 滚动到当前高度
+            self.driver.execute_script(f"window.scrollTo(0, {scroll_height})")
+            time.sleep(0.5)  # 等待内容加载
+
+            # 获取页面的总高度
+            total_height = self.driver.execute_script("return document.body.scrollHeight")
+            # 截图并保存到 images 列表中
+            image = self.driver.get_screenshot_as_png()
+            image = Image.open(io.BytesIO(image))
+            scroll_height += 812
+            # 如果滚动的高度已经达到了总高度，那么就退出循环
+            if scroll_height >= total_height > 812:
+                # 如果超出了总高度，那么就裁剪最后一张图
+                diff = scroll_height - total_height
+                image = image.crop((0, image.height / 2 - diff, image.width, image.height))
+
+            images.append(image)
+            print("images", image.height)
+            # 更新滚动的高度
+
+            # 如果滚动的高度已经达到了总高度，那么就退出循环
+            if scroll_height >= total_height:
+                break
+
+        # 合并所有的截图
+        final_image = Image.new('RGB', (images[0].width, sum(i.height for i in images)))
+        current_height = 0
+        for image in images:
+            final_image.paste(image, (0, current_height))
+            current_height += image.height
+
+        # 保存最终的截图
+        final_image.save("images/" + str(self.count) + '.png')
+        self.count += 1
+
+    def quit(self):
+        self.driver.quit()
+
+
+if __name__ == '__main__':
+    tool = AutoPrintScreen()
+    urls = [
+    "https://admin.sdlian.cn/l/euZXlyWg0D",
+    "https://admin.sdlian.cn/l/P1BcIrVvvG",
+    "https://admin.sdlian.cn/l/iuNuJcYwO3",
+    "https://www.chengzijianzhan.com/tetris/page/7332394489624444978/",
+    "https://www.chengzijianzhan.com/tetris/page/7002050685370712071",
+    "https://www.chengzijianzhan.cc/tetris/page/7278943830120235063",
+    "https://www.chengzijianzhan.com/tetris/page/7184851026884526135",
+    "https://www.chengzijianzhan.com/tetris/page/7340481851197423666",
+    "https://cid-h5.htat.cc/",
+    "https://app.yatiku.com/rectLhf3n",
+    "https://www.chengzijianzhan.com/tetris/page/7306781740457852978",
+    "https://daqi.dqapi.cn/order/Common/site/",
+    "https://admin.sdlian.cn/l/mPoT4wiSvq",
+    "https://www.chengzijianzhan.com/tetris/page/7342443668399472667",
+    "https://admin.sdlian.cn/l/UX0VCgQh62",
+    "https://mapp.hqwx.com/h5/delivery/index",
+    "https://www.chengzijianzhan.com/tetris/page/7313872843292803123",
+    "https://www.chengzijianzhan.cc/tetris/page/7267790008390926391",
+    "https://www.chengzijianzhan.com/tetris/page/7110036148337721375/",
+    "https://www.chengzijianzhan.com/tetris/page/7326827307615141938",
+    "https://jumpluna.58.com/r",
+    "https://www.chengzijianzhan.com/tetris/page/7301201596397338662",
+    "https://www.chengzijianzhan.com/tetris/page/7312750655759990821",
+    "https://www.chengzijianzhan.cc/tetris/page/7342399518531403826",
+    "https://www.kaishustory.com/h5/v2/activeTemplate/home",
+    "https://admin.sdlian.cn/l/I4EmVcErNy",
+    "https://www.chengzijianzhan.cc/tetris/page/7296727798301982729",
+    "https://www.chengzijianzhan.com/tetris/page/7324235125956198451",
+    "https://www.chengzijianzhan.com/tetris/page/7265153873412718651/",
+    "https://www.chengzijianzhan.cc/tetris/page/7246982339938861116",
+    "https://www.chengzijianzhan.com/tetris/page/7319764244982824969",
+    "https://www.chengzijianzhan.com/tetris/page/7342205902017069094",
+    "https://www.chengzijianzhan.cc/tetris/page/7247413272998772796",
+    "https://www.chengzijianzhan.com/tetris/page/7343073486619148298",
+    "https://www.chengzijianzhan.com/tetris/page/7267102116639932453",
+    "https://www.chengzijianzhan.com/tetris/page/7324230987327406106",
+    "https://www.chengzijianzhan.com/tetris/page/7312780358490193958/",
+    "https://s.gh6a.com/r/3bed12e",
+    "https://www.chengzijianzhan.cc/tetris/page/7299342338362753034",
+    "https://www.chengzijianzhan.com/tetris/page/7342454164385611803",
+    "https://www.chengzijianzhan.com/tetris/page/7243705382311837751",
+    "https://ichuangad.com/ht-tiktokshop",
+    "https://www.chengzijianzhan.com/tetris/page/6894513096187854862",
+    "https://www.chengzijianzhan.cc/tetris/page/7311866808490786853",
+    "https://www.chengzijianzhan.com/tetris/page/7307166518528409638",
+    "https://nbtga.whjiaoy.com/putin/linkTovnn7Pb",
+    "https://h5mp.yiche.com/inquire-new/live-inquire/index",
+    "https://qy.compass.cn/1yuan.php",
+    "https://www.chengzijianzhan.com/tetris/page/7321561239632134154",
+    "https://www.chengzijianzhan.com/tetris/page/7314594262254256155",
+    "https://referral.xiaoyezi.com/magic/activity/78",
+    "https://z.douyin.com/p53t",
+    "https://www.chengzijianzhan.com/tetris/page/7316414662844432435",
+    "https://www.chengzijianzhan.com/tetris/page/7332793404562276390",
+    "https://www.amemv.com/share/user/MS4wLjABAAAAcZ7RmTeANhQh6GOC_jRGipCCPehCncEM1HklhMo1Y-c",
+    "https://www.amemv.com/share/user/MS4wLjABAAAA1QdkTkACLHtFdszcmMsa1xh7NyXDohG4D0a5NcUonSO4gQOzOCMoe_SN6AuDaESv",
+    "https://www.amemv.com/share/user/MS4wLjABAAAAO0a2EGx7aCUBzzM9Xx5Dlouz6Ynet3HgzniGHYb862s",
+    "https://m.yuanfudao.com/ada-sale-activity/pages/detail/detail",
+    "https://www.amemv.com/share/user/MS4wLjABAAAA8GJd8lVjiahVLaTnoXB62K9jgTunzE-F5_GJvywLug0",
+    "https://www.amemv.com/share/user/MS4wLjABAAAAFz7nH3H017ksZVvkDM1wfmlEnWsKn2szsq8XRot7KSw",
+    "https://www.amemv.com/share/user/MS4wLjABAAAAcaDf72--z0XT6nvymVRmgVtUrIHgNNDlfaOjLV55zPE",
+    "https://www.amemv.com/share/user/MS4wLjABAAAAEV1WIITTb8gJeD56CrdYF_trZTOJuaZOao35XZMmqX-L3_cNb8dzYSWJ8K6BeiSM",
+    "https://luodiye.maxengine.cn/land_page",
+    "https://www.chengzijianzhan.com/tetris/page/7342730911127765042",
+    "https://www.amemv.com/share/user/MS4wLjABAAAAgujHyJfD2REXcNsFpVU5XLVqz4742YRq_pIbjK565ypY9O0pkFsmlsl9MRFOMyjY",
+    "https://www.amemv.com/share/user/MS4wLjABAAAAVz3xYPQ64SrwZmV5YBfL4MFFKLBTERKf1MsXJRWAkGDIjBjRcSNSJRKQodKgY-HD",
+    "https://www.chengzijianzhan.com/tetris/page/7330462433377501234",
+    "https://www.chengzijianzhan.com/tetris/page/7273911091234209849",
+    "https://www.chengzijianzhan.com/tetris/page/7197979921078812732",
+    "https://h5-dsh.jianzhikeji.com/page/web/new",
+    "https://www.douyin.com/user/MS4wLjABAAAAMx1KyYcbK0UsrKf0NxCU9FpCLqwYYN_jAdirGEa5aQM",
+    "https://www.chengzijianzhan.cc/tetris/page/7337574691110699058",
+    "https://www.amemv.com/share/user/MS4wLjABAAAAdQkL9cgg0LTJtgwAwbL4ioaCz9jfPO62cW30x2WrWUk",
+    "https://www.chengzijianzhan.com/tetris/page/7255141619099762748",
+    "https://c.dushu365.com/activity/eva.view/v/",
+    "https://www.amemv.com/share/user/MS4wLjABAAAAuuD1UkvGtnBdwc0xUJAJo3mEuSVAaUknqWToXcbpPag",
+    "https://www.chengzijianzhan.cc/tetris/page/7250050517920170040",
+    "https://www.chengzijianzhan.com/tetris/page/7297486377338667059",
+    "https://www.amemv.com/share/user/MS4wLjABAAAASTdX2Tb_874JR-J9rZrk1ksu75KyIpLWh7xX4jpX46Y",
+    "https://app.yatiku.com/rectEmj6r",
+    "https://www.amemv.com/share/user/MS4wLjABAAAAeZqIlHqBGfREnaZ5FI62TO4POAqcOlVQIxGm0o8VfkcrE4bcLT0hfOcickdOy-Bx",
+    "https://www.chengzijianzhan.com/tetris/page/7295565475685613619/",
+    "https://www.amemv.com/share/user/MS4wLjABAAAAnX1CJbwEZbA-3-6Pwi-6SGSrkbkhwWOHjCDIq-k-kDnLGDNwHiNCKbEppByHF4rh",
+    "https://www.amemv.com/share/user/MS4wLjABAAAAuvCSNzTIrosV87hx1b_ZCLnirF01oceKhEc_jlouW84AW0hCfC9b44zmdWsIHh54",
+    "https://www.chengzijianzhan.com/tetris/page/7081123990747807752",
+    "https://www.amemv.com/share/user/MS4wLjABAAAA_310TGPn67gRN9tZLh1Nngw9_zTfM6rZnwT2EDMWaQM",
+    "https://l.koolearn.com/qeQYjRZ",
+    "https://www.chengzijianzhan.cc/tetris/page/7263006559848300581",
+    "https://www.chengzijianzhan.com/tetris/page/7342460434342412339",
+    "https://www.amemv.com/share/user/MS4wLjABAAAA_aXI-bP-I_tdFt2AWQ-DLpT6qDrkpzDiVNO3Y3jeIl4",
+    "https://vw.faw-vw.com/#/IndexSix",
+    "https://www.chengzijianzhan.cc/tetris/page/7290433504219103289",
+    "https://m.zjbyte.net/share/douyin/",
+    "https://www.chengzijianzhan.com/tetris/page/7319712541923246107",
+    "https://www.chengzijianzhan.com/tetris/page/7332382852904845362",
+    "https://www.chengzijianzhan.com/tetris/page/7320065297718722597",
+    "https://www.amemv.com/share/user/MS4wLjABAAAAnPR0Q7EycEDHv-czIG2zqqvHy0LQRNQVsIIIvS30zhI",
+    "https://www.amemv.com/share/user/MS4wLjABAAAA0cC25xNa7WU0paKkzVSnKYMy0XFAEFTMqTWIaMQWpPM",
+    "https://www.chengzijianzhan.com/tetris/page/7343813257688858675/",
+    "https://www.amemv.com/share/user/MS4wLjABAAAAjxPKZpBrc4symio4Te7fJKSVBv3VWv64bQsVZj0Xd5au1dnqGJv0HZqC7wG2CFsh",
+    "https://www.chengzijianzhan.com/tetris/page/7339097428166000691",
+    "https://www.douyin.com/user/MS4wLjABAAAAVIoPBImwXnWarCV4D8u2XW397mGiBaK4owBDgVgfKeA",
+    "https://m.saipujianshen.com/zt/douyinpinzhuan/",
+    "https://www.chengzijianzhan.com/tetris/page/7337110143258345482",
+    "https://www.chengzijianzhan.com/tetris/page/7295632997373362226",
+    "https://s.gh6a.com/r/c3fe22e",
+    "https://app.yatiku.com/rectB06yY",
+    "https://id.faw-vw.com/#/home",
+    "https://www.chengzijianzhan.com/tetris/page/7339718886445285413",
+    "https://www.chengzijianzhan.com/tetris/page/7320142612068663322",
+    "https://www.chengzijianzhan.com/tetris/page/7081937351139999751",
+    "https://www.amemv.com/share/user/MS4wLjABAAAAoMPZcUiRkuxrtIqBKKklpOchMOeiOC8iB1Q09COIArWowUNQPf8_Ur2xYhMk7XOt",
+    "https://www.amemv.com/share/user/MS4wLjABAAAAd9ZYs5eZGW1_KEJjhRA8MetQ5TIs_Yg5uzgelynfVqqSKSbWqBJVdFa0EKrmlAVd",
+    "https://www.amemv.com/share/user/MS4wLjABAAAA1cDRS9qfenNzlYVkJXcSKN1xJZM4yJ9GvG6rQITcNEM",
+    "https://h5.stockhn.com/luodi_vue3/t-customer-door/index.html",
+    "https://apps.bytesfield.com/download/basic/cur/b1350de255b728c1c08fda266a38d4ded08440c0",
+    "https://www.amemv.com/share/user/MS4wLjABAAAAKbzck2EvrIJhIJePANtC7lK2Ha2DTSzNRib4ak7D-f-_7q9mlwt1kzEgu9iJgbiJ",
+    "https://mars-upload.9fmk.com/ykkg/mini/mcnFreeJumpPageMiniTemp.html",
+    "https://www.amemv.com/share/user/MS4wLjABAAAA42js8x6fg2CwbCQhCj-NHm-9cV749smWlN6vqKw59gMFoflfHXS0vHSX7GcxJWL_",
+    "https://fcrm-landing-page.feichengjiaoyu.com/1749396306115895297_index.html",
+    "https://www.lotuscars.com.cn/emeya",
+    "https://www.chengzijianzhan.com/tetris/page/7257811981804634171/",
+    "https://aweme.snssdk.com/falcon/douyin_falcon/dou_plus/redirect/",
+    "https://www.douyin.com/user/MS4wLjABAAAA8xH6y-9xU9cbXkUK9G_jb0bGf8JC1kwZznv5DsjLUUo",
+    "https://www.chengzijianzhan.com/tetris/page/7312671399477329947",
+    "https://www.chengzijianzhan.com/tetris/page/7259312803768664121",
+    "https://app.yatiku.com/rectAqnYe",
+    "https://www.amemv.com/share/user/MS4wLjABAAAA8UyOvbeEcZJiYbrEG55tSPmtkjMuDojb2V9twE2gd_bkCeQeSwglJBMCmgkE4f2u",
+    "https://www.chengzijianzhan.cc/tetris/page/7329915948697501705",
+    "https://www.chengzijianzhan.com/tetris/page/7340117543892369420",
+    "https://c.jinyuan.pro/ec/landing/202401/af36353304d11649d7237ddb72e28565.html",
+    "https://www.amemv.com/share/user/MS4wLjABAAAArHGZJbhNf7BlZnaMImJWqnFKw2EdjwrHjlyBfiuoHLfiwJVdgfWw6NPsI1j6gQ2D",
+    "https://www.amemv.com/share/user/MS4wLjABAAAAbWaxaGWZrxD3uXVScc_nmPDaeFNQTn6F_DTr5lzW2_Y",
+    "https://www.chengzijianzhan.com/tetris/page/7345299487335890954",
+    "https://www.chengzijianzhan.com/tetris/page/7343463781127798811",
+    "https://audi-embedded-wap.saic-audi.mobi/favoritecar/#/landingPage",
+    "https://www.amemv.com/share/user/MS4wLjABAAAA3IDZSI2R6NHsfwJrTq8hXHtdgbDpkY-jtLo3pd-Uo5ePdvHcTHcqujaDrE5IEHBE",
+    "https://www.chengzijianzhan.com/tetris/page/7289277607798784060/",
+    "https://www.chengzijianzhan.com/tetris/page/7341226595669458954",
+    "https://www.amemv.com/share/user/MS4wLjABAAAAs1a9N_SqbWNiJHVVdy-cZv-MeOx2jYaUaa5XlL616b9XIeQEmzzwCpOTTBJ99P0m",
+    "https://v.douyin.com/yJeuTH7/",
+    "https://www.chengzijianzhan.com/tetris/page/7124572567990239262",
+    "https://www.chengzijianzhan.com/tetris/page/7267463378346803259",
+    "https://www.chengzijianzhan.com/tetris/page/7289277607798784060",
+    "https://erliangcid.psnlove.com/land/",
+    "https://www.chengzijianzhan.com/tetris/page/7013640364420120607",
+    "https://www.amemv.com/share/user/MS4wLjABAAAAi8K7CpcflC-hiUdST36Y_-EzLDAmeUZUm2q9k-Qvz7ZiDmweVdREvhp4hxU0o8UV",
+    "https://qidian.maixuekeji.com/association_frontend_service/qidian/windmill/formFreeDetail",
+    "https://www.amemv.com/share/user/MS4wLjABAAAAg0-vaTJe9AAsSv_O70oX81rudK-r0F2TcjS2hrb4EkM",
+    "https://www.chengzijianzhan.com/tetris/page/7316349139343212595",
+    "https://www.bydauto.com.cn/pc/configCar/",
+    "https://www.amemv.com/share/user/MS4wLjABAAAAyhrMiOrnE3qyvj2YmeopyPgCyX2AuyhqFHwKeO8oD7otT1CHJiB09jX2Jdlz2wG6",
+    "https://www.amemv.com/share/user/MS4wLjABAAAA_zn5XtgsO6VEjiLAR2tiYKuEOASs9XRmh685K4UVaIs",
+    "https://www.amemv.com/share/user/MS4wLjABAAAA9rJ9tcDaVstZHAjJbrM9_e5jHzYm4BBEZgOe6epgRUo8PLsBhe8VZZEhqYfwsv7a",
+    "https://www.chengzijianzhan.com/tetris/page/7330164692461486131",
+    "https://www.chengzijianzhan.com/tetris/page/7340524669324181531",
+    "https://www.amemv.com/share/user/MS4wLjABAAAANPvhScsUWQCfcdTjwyELav_VERWEBMlxVgW0FEcbYVN5Nx2s4eIpedJ8rPf7lMKQ",
+    "https://www.chengzijianzhan.com/tetris/page/7304898087519993865",
+    "https://www.chengzijianzhan.com/tetris/page/7342495894959587355",
+    "https://www.chengzijianzhan.com/tetris/page/7326868664827920421",
+    "https://www.chengzijianzhan.cc/tetris/page/7236143428899668025",
+    "https://www.chengzijianzhan.com/tetris/page/7339416433527390245",
+    "https://www.chengzijianzhan.com/tetris/page/7208014976748290105",
+    "https://www.chengzijianzhan.com/tetris/page/6807307604893630471",
+    "https://render.alipay.com/p/s/ulink/",
+    "https://www.chengzijianzhan.com/tetris/page/7260294374717456443/",
+    "https://www.chengzijianzhan.com/tetris/page/7337216418994192434",
+    "https://www.chengzijianzhan.com/tetris/page/7342797758527373350",
+    "https://www.chengzijianzhan.com/tetris/page/7160560277452603428",
+    "https://www.amemv.com/share/user/MS4wLjABAAAAnEpes4n-PpvapedZaPFoKkvMuYFsgxdJEg1LwbcDYVY",
+    "https://www.chengzijianzhan.com/tetris/page/7325730047217696795",
+    "https://www.chengzijianzhan.com/tetris/page/7200959780357636153",
+    "https://www.amemv.com/share/user/MS4wLjABAAAAmYbSrrLceXiO_yZXy0bYFDoEc0rbbTFTXZ07EJp2of5JUVmGl8angGEg9oyJYm66",
+    "https://www.chengzijianzhan.cc/tetris/page/7304556587146182665",
+    "https://www.chengzijianzhan.com/tetris/page/7221482268691152957",
+    "https://www.chengzijianzhan.com/tetris/page/7319824767870746650",
+    "https://www.chengzijianzhan.com/tetris/page/7339768320213712947/",
+    "https://www.chengzijianzhan.com/tetris/page/7262301733190926391/",
+    "https://www.amemv.com/share/user/MS4wLjABAAAAA1ZxC2RGe9yMl9MxjJz2AvaxgOn0IcidrDVCMhjtDnI",
+    "https://www.chengzijianzhan.com/tetris/page/7272163597546176573",
+    "https://referral.xiaoyezi.com/magic/activity/126",
+    "https://storage.pangdasc.com/pages/657451814257/landing_mt1_page.html",
+    "https://lingxi.xdf.cn/2024shandian/dou/form",
+    "https://www.chengzijianzhan.cc/tetris/page/7287104019889078327",
+    "https://zwa.dgegbj.com/putin/linkToPXhPzv",
+    "https://www.chengzijianzhan.com/tetris/page/7224011689388834877",
+    "https://www.chengzijianzhan.com/tetris/page/7343915470439596082",
+    "https://www.chengzijianzhan.com/tetris/page/7340201059828826151",
+    "https://www.amemv.com/share/user/MS4wLjABAAAAYP6eWV9UfnmfnJVRr01MuWzv7pWiXjCljF_VajSRD50",
+    "https://www.chengzijianzhan.com/tetris/page/7339054494552260659",
+    "https://www.chengzijianzhan.cc/tetris/page/7272182594237775933",
+    "https://www.chengzijianzhan.com/tetris/page/7324152247759667250"
+]
+    for url in urls:
+        tool.get_screenshot(url)
+    tool.quit()
